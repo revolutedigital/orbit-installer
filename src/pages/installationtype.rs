@@ -64,8 +64,11 @@ page!(InstallationType {
                 let value = APPLICATION_STATE.read().installation_type;
                 match value.unwrap() {
                     InstallationType::DualBoot(_) => Page::InstallDual,
+                    // Orbit: insere tela Privacy ANTES da Confirmation pro caminho do
+                    // disco inteiro (caminho mais comum pro leigo). É o manifesto de
+                    // privacidade — afirmação da identidade do Orbit antes do install.
                     InstallationType::ChromebookInstall | InstallationType::WholeDisk => {
-                        Page::Confirmation
+                        Page::Privacy
                     }
                     InstallationType::Custom => Page::InstallCustom,
                 }

@@ -9,4 +9,5 @@ pub mod installationtype;
 pub mod installcustom;
 pub mod installdual;
 pub mod language;
+pub mod privacy;
 pub mod welcome;

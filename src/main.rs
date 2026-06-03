@@ -76,6 +76,7 @@ generate_pages!(Page AppModel AppMsg:
     Welcome,
     Destination,
     InstallationType,
+    Privacy,
     Confirmation |msg| {
         tracing::debug!("ConfirmationPage emitted {msg:?}");
         match msg {

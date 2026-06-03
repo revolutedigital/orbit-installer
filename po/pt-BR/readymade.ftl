@@ -1,88 +1,144 @@
-prev = Anterior
-next = Próximo
-unknown-os = S.O. desconhecido
+# Orbit Linux — i18n PT-BR do readymade.
+#
+# Princípios de tom (decisão Igor):
+# 1. 2ª pessoa direta — "você" em vez de "Por favor, defina"
+# 2. Linguagem do leigo — "Apagar o Windows" em vez de "Disco Inteiro"
+# 3. Honestidade nos pontos críticos — avisar quando é irreversível, sem disfarçar
+# 4. Marca "Gravidade/órbita" com moderação — só na boas-vindas e na conclusão
+# 5. Sem "Por favor" / "favor" / tom de software empresarial
+#
+# Override sobre o po/pt-BR/readymade.ftl upstream da Fyra Labs.
+
+# Navegação
+prev = Voltar
+next = Continuar
+
+# OS detection
+unknown-os = Sistema desconhecido
+
+# Tipos de partição (mantidos próximos do upstream — termos técnicos)
 parttype-root = Sistema de arquivos raiz ({ $path })
 parttype-extendedboot = Partição extendida do carregador de inicialização ({ $path })
 parttype-esp = Partição do Sistema EFI ({ $path })
-parttype-home = Arquivos do Usuário ({ $path })
+parttype-home = Arquivos do usuário ({ $path })
 parttype-var = Arquivos variáveis ({ $path })
-parttype-other = Ponto de montagem de particionamento customizado
-page-welcome = Bem-Vindo a(o) { $distro }
-page-welcome-desc = Você pode tentar { $distro } ou iniciar a instalação agora.
-page-welcome-try = Tentar
-page-welcome-install = Instalar
-page-failure = Falha na instalação
+parttype-other = Ponto de montagem personalizado
+
+# Tela de boas-vindas — usa a marca "órbita" (1ª referência)
+page-welcome = Bem-vindo ao { $distro }
+page-welcome-desc = Você pode experimentar o { $distro } primeiro ou começar a instalação agora. Sem pressa.
+page-welcome-try = Experimentar primeiro
+page-welcome-install = Instalar agora
+
+# Falha
+page-failure = Algo deu errado
 page-failure-close = Fechar
-page-failure-bug = Reporte uma falha
-page-language = Linguagem
-page-language-search-lang = Pesquisar Idioma/Localidade…
-page-language-next = Próximo
-page-completed = Completo
-page-completed-desc = Instalação completa. Você pode reiniciar agora e aproveitar seu novo sistema.
+page-failure-bug = Reportar o problema
+
+# Idioma
+page-language = Idioma
+page-language-search-lang = Procurar idioma…
+page-language-next = Continuar
+
+# Conclusão — usa a marca "órbita" (2ª referência, fechamento)
+page-completed = Pronto
+page-completed-desc = O { $distro } já é seu. Reinicie pra entrar na sua nova órbita.
 page-completed-close = Fechar
-page-completed-reboot = Reiniciar
-page-destination = Destino
-page-destination-scanning = Procurando Discos
-page-destination-wait = Esperando o os-prober…
+page-completed-reboot = Reiniciar agora
+
+# Destino do install
+page-destination = Onde instalar
+page-destination-scanning = Procurando discos
+page-destination-wait = Aguardando o detector de sistemas…
 page-destination-no-disk = Nenhum disco encontrado
-page-destination-no-disk-desc = Não foram encontrados discos adequados para instalação.
-page-installdual = Dual Boot
-page-installdual-otheros = Outro SO
+page-destination-no-disk-desc = Não encontrei nenhum disco onde possa instalar o { $distro }.
+
+# Dual boot
+page-installdual = Lado a lado com outro sistema
+page-installdual-otheros = Outro sistema
+
+# Confirmação
 page-confirmation = Confirmar
-page-confirmation-problem-device-mounted = { $dev } está montado em { $mountpoint }. Desmonte para prosseguir.
+page-confirmation-problem-device-mounted = { $dev } está em uso (montado em { $mountpoint }). Feche os programas que estão usando ele antes de continuar.
 page-confirmation-problem-devblkopen =
-    O dispositivo <tt>{ $dev }</tt> está em uso pelos seguintes processos:
+    O disco <tt>{ $dev }</tt> está sendo usado por estes processos:
     <tt>{ $pids }</tt>
-    Esses processos devem ser fechados antes que o instalador prossiga.
-page-installation = Instalação
-page-installation-welcome-desc = Conheça seu novo Sistema Operacional.
+    Feche eles antes de continuar.
+
+# Telas do instalador rodando
+page-installation = Instalando
+page-installation-welcome-desc = Conheça seu novo sistema.
 page-installation-help = Precisa de ajuda?
-page-installation-help-desc = Pergunte em um de nossos chats!
-page-installation-contrib = Contribua para { $distro }
-page-installation-contrib-desc = Aprenda como contribuir com o seu tempo, dinheiro, ou hardware.
-page-installation-progress = Instalando o sistema...
-page-installcustom = Instalação customizada
-page-installcustom-title = Partições e Pontos de Montagem
+page-installation-help-desc = Pergunta na nossa comunidade.
+page-installation-contrib = Contribuir com o { $distro }
+page-installation-contrib-desc = Veja como colaborar com seu tempo, suporte ou hardware.
+page-installation-progress = Instalando o { $distro }…
+
+# Particionamento customizado (público técnico — termos mais próximos do original)
+page-installcustom = Configuração personalizada
+page-installcustom-title = Partições e pontos de montagem
 page-installcustom-desc =
     { $num } { $num ->
         [uma] definição
        *[outras] definições
     }
-page-installcustom-tool = Abrir a ferramenta de particionamento
-page-installcustom-add = Adicione uma nova definição/linha
-page-installationtype = Tipo de instalação
-page-installationtype-entire = Disco Inteiro
-page-installationtype-tpm = Habilitar TPM
-page-installationtype-encrypt = Habilitar criptografia do disco
+page-installcustom-tool = Abrir ferramenta de particionamento
+page-installcustom-add = Adicionar definição
+
+# Tipo de instalação — AQUI é onde precisa máxima clareza pro leigo
+page-installationtype = Como instalar
+page-installationtype-entire = Usar o disco todo (apaga tudo que tem nele)
+page-installationtype-tpm = Ativar TPM
+page-installationtype-encrypt = Criptografar o disco com senha
 page-installationtype-chromebook = Chromebook
-page-installationtype-dual = Dual Boot
-page-installationtype-custom = Customizado
-dialog-installtype-encrypt = Criptografia de disco
+page-installationtype-dual = Instalar do lado do sistema atual
+page-installationtype-custom = Configuração avançada (manual)
+
+# Diálogos da criptografia
+dialog-installtype-encrypt = Senha do disco criptografado
 dialog-installtype-encrypt-desc =
-    Por favor, defina a senha de criptografia do disco.
-    Se você esquecer a senha, seus dados não serão recuperáveis.
+    Defina uma senha pra criptografar o disco.
+    Se você esquecer essa senha, seus arquivos vão se perder pra sempre. Não há como recuperar.
 dialog-installtype-password = Senha
-dialog-installtype-repeat = Repita a senha
+dialog-installtype-repeat = Confirme a senha
 dialog-installtype-cancel = Cancelar
 dialog-installtype-confirm = Confirmar
-installtype-edit-mp = Mudar o ponto de montagem
-installtype-rm-mp = Remover o ponto de montagem
+
+# Edição de pontos de montagem (técnico)
+installtype-edit-mp = Mudar onde monta
+installtype-rm-mp = Remover ponto de montagem
 dialog-mp-part = Partição
 dialog-mp-at = Montar em
 dialog-mp-opts = Opções de montagem
-installtype-parttool = Selecione sua ferramenta de particionamento
-stage-extracting = Extraindo arquivos
-stage-copying = Copiando arquivos
-stage-mkpart = Criando partições e copiando arquivos
-stage-initramfs = Regenerando a initramfs
-stage-grub = Gerando padrões do grub do sistema
-stage-grub1 = Gerando o grub.cfg de estágio 1 no ESP...
-stage-grub2 = Gerando o grub.cfg de estágio 2 no /boot/grub2/grub.cfg...
-stage-biosgrub = Instalando Grub2 de BIOS
-stage-kernel = Reinstalando kernels
-stage-selinux = Configurando rótulos SELinux
-err-no-bios = Não é possível detectar /sys/firmware/efi, e a distribuição desabilitou o suporte ao BIOS.
-dialog-confirm-warn-efipartfound-title = Partição EFI Detectada
+installtype-parttool = Escolha sua ferramenta de particionamento
+
+# Etapas da instalação (mostradas durante o install)
+stage-extracting = Extraindo arquivos do { $distro }
+stage-copying = Copiando o { $distro } pro disco
+stage-mkpart = Preparando o disco e copiando o { $distro }
+stage-initramfs = Preparando o sistema pra bootar
+stage-grub = Configurando o boot
+stage-grub1 = Configurando o boot (etapa 1)…
+stage-grub2 = Configurando o boot (etapa 2)…
+stage-biosgrub = Instalando o boot legado
+stage-kernel = Reinstalando o núcleo do sistema
+stage-selinux = Configurando segurança (SELinux)
+
+# Erros
+err-no-bios = Não é possível detectar UEFI nesta máquina, e o { $distro } não suporta BIOS legado.
+
+# Aviso da partição EFI — CRÍTICO. Honestidade total: vai destruir outros sistemas.
+dialog-confirm-warn-efipartfound-title = Já tem outro sistema instalado nesse disco
 dialog-confirm-warn-efipartfound-desc =
-    Caso esteja realizando esta instalação junto a outro sistema, verifique se não existe uma partição EFI no disco de destino.
-    O disco de destino selecionado contêm uma partição EFI que será apagada e reformatada durante a instalação, tornando os sistemas nela registrados não inicializáveis. Essa ação é irreversível.
+    Atenção: encontrei uma partição EFI nesse disco. Isso normalmente significa que tem outro sistema instalado aqui (Windows, outro Linux).
+
+    Se você continuar, eu vou apagar essa partição EFI. O outro sistema vai deixar de bootar. Isso não tem volta — você precisaria reinstalar o outro sistema do zero pra ele voltar a funcionar.
+
+    Se você quer manter os dois sistemas, cancele agora e volte pra escolher "Instalar do lado do sistema atual".
+
+# Manifesto de privacidade (adição Orbit Linux)
+# Esta tela não oferece opção, é declaração. Privacidade no Orbit é inegociável.
+page-privacy-title = Seus dados ficam aqui
+page-privacy-desc-1 = O { $distro } aprende como você trabalha. Tudo o que ele aprende fica neste computador — nada vai pra nuvem, ninguém além de você vê.
+page-privacy-desc-2 = Você pode auditar e apagar tudo o que o { $distro } aprendeu sobre você, a qualquer momento. Ao instalar, você reconhece que é assim que ele funciona.
+page-privacy-accept = Entendi

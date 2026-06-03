@@ -1,0 +1,70 @@
+[install]
+# v0.2.0-alpha: começamos s só com instalação no disco inteiro (caminho do leigo).
+# wholedisk é o cenário 1 (Pop!_OS style): "apaga tudo e instala". Custom (Blivet-GUI
+# style) e dualboot vêm na v0.2.1+ depois de testar o fluxo wholedisk com gente real.
+# A pesquisa avisou: issue #117 ainda quebra em NVIDIA — testar AMD/Intel primeiro.
+allowed_installtypes = ["wholedisk"]
+copy_mode = "bootc"
+bootc_imgref = "ghcr.io/revolutedigital/orbit:latest"
+bootc_enforce_sigpolicy = false
+
+[distro]
+name = "Orbit Linux"
+icon = "com.orbitlinux.Installer"
+# bios_support = false → só UEFI. Bootc requer UEFI no F42; legacy BIOS quebra em
+# vários edge cases (issue Bluefin discourse). Em PC de 5+ anos pode incomodar — mas
+# pro nosso público (anti-Windows com PC razoável) UEFI é regra desde Win10.
+bios_support = false
+
+# Bento cards na tela final (sequência pós-instalação). Pensados pro leigo, em PT-BR.
+# São 3 cards lado a lado quando a instalação termina, antes do botão Reiniciar.
+
+[[bento]]
+title = "page-welcome"
+desc = "page-installation-welcome-desc"
+link = "https://orbitlinux.org/comecar/"
+icon = "explore-symbolic"
+
+[[bento]]
+title = "page-installation-help"
+desc = "page-installation-help-desc"
+link = "https://orbitlinux.org/ajuda/"
+icon = "chat-symbolic"
+
+[[bento]]
+title = "page-installation-contrib"
+desc = "page-installation-contrib-desc"
+link = "https://github.com/revolutedigital/orbit-linux"
+icon = "applications-development-symbolic"
+
+# Módulos pós-instalação. Mantemos a sequência padrão Fedora bootc — esses módulos
+# preparam o /boot, regeneram o kernel pro hardware real, configuram GRUB, etc.
+# NÃO mexer sem entender consequência: omitir um trava o boot pós-instalação.
+[[postinstall]]
+module = "Fstab"
+
+[[postinstall]]
+module = "CleanupBoot"
+
+[[postinstall]]
+module = "ReinstallKernel"
+
+[[postinstall]]
+module = "GRUB2"
+
+[[postinstall]]
+module = "PrepareFedora"
+
+[[postinstall]]
+module = "EfiStub"
+distro_name = "Orbit Linux"
+
+[[postinstall]]
+module = "InitialSetup"
+
+[[postinstall]]
+module = "Language"
+lang = "pt-BR"
+
+[[postinstall]]
+module = "Script"
