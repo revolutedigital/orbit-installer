@@ -109,3 +109,11 @@ page-privacy-title = Your data stays here
 page-privacy-desc-1 = {$distro} learns from how you use your computer. Everything it learns stays on this machine — never sent to the cloud, never seen by anyone but you.
 page-privacy-desc-2 = You can audit and delete everything {$distro} learned about you, at any moment. By installing {$distro}, you acknowledge this is how it works.
 page-privacy-accept = I understand
+
+# Bento cards (slideshow during installation — Orbit Linux addition)
+bento-learn-title = It learns. You stay private.
+bento-learn-desc = {$distro} adapts to how you work — and everything it learns about you stays on this machine. No cloud, no telemetry.
+bento-rollback-title = It cannot brick itself.
+bento-rollback-desc = Every system update is reversible. If something breaks, {$distro} rolls back automatically. You'll never lose work to a bad update.
+bento-organize-title = It organizes for you.
+bento-organize-desc = Open your editor, terminal, and browser — {$distro} arranges them by what you're doing. Focus mode kicks in when you need it.

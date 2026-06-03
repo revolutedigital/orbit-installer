@@ -143,3 +143,12 @@ page-privacy-title = Seus dados ficam aqui
 page-privacy-desc-1 = O { $distro } aprende como você trabalha. Tudo o que ele aprende fica neste computador — nada vai pra nuvem, ninguém além de você vê.
 page-privacy-desc-2 = Você pode auditar e apagar tudo o que o { $distro } aprendeu sobre você, a qualquer momento. Ao instalar, você reconhece que é assim que ele funciona.
 page-privacy-accept = Entendi
+
+# Cards da tela de instalação (slideshow Orbit, em vez de "Welcome/Help/Contribute")
+# 3 mensagens-manifesto sobre o que torna o Orbit diferente.
+bento-learn-title = Ele aprende. Você continua privado.
+bento-learn-desc = O { $distro } se adapta ao seu jeito de trabalhar — e tudo o que ele aprende sobre você fica neste computador. Sem nuvem, sem telemetria.
+bento-rollback-title = Ele não quebra sozinho.
+bento-rollback-desc = Toda atualização do sistema é reversível. Se algo der errado, o { $distro } volta sozinho pro estado anterior. Você não vai perder trabalho por causa de update ruim.
+bento-organize-title = Ele organiza por você.
+bento-organize-desc = Abra editor, terminal e navegador — o { $distro } arruma eles do jeito que você precisa. Modo foco entra sozinho quando você está concentrado.
