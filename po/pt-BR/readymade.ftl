@@ -138,6 +138,7 @@ dialog-confirm-warn-efipartfound-desc =
 
 # Manifesto de privacidade (adição Orbit Linux)
 # Esta tela não oferece opção, é declaração. Privacidade no Orbit é inegociável.
+page-privacy = Privacidade
 page-privacy-title = Seus dados ficam aqui
 page-privacy-desc-1 = O { $distro } aprende como você trabalha. Tudo o que ele aprende fica neste computador — nada vai pra nuvem, ninguém além de você vê.
 page-privacy-desc-2 = Você pode auditar e apagar tudo o que o { $distro } aprendeu sobre você, a qualquer momento. Ao instalar, você reconhece que é assim que ele funciona.

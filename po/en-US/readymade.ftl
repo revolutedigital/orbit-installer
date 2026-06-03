@@ -104,6 +104,7 @@ stage-selinux = Setting SELinux labels
 err-no-bios = Cannot detect /sys/firmware/efi, and the distribution disabled BIOS support.
 
 # Privacy manifesto (Orbit Linux addition — affirms identity, not configuration)
+page-privacy = Privacy
 page-privacy-title = Your data stays here
 page-privacy-desc-1 = {$distro} learns from how you use your computer. Everything it learns stays on this machine — never sent to the cloud, never seen by anyone but you.
 page-privacy-desc-2 = You can audit and delete everything {$distro} learned about you, at any moment. By installing {$distro}, you acknowledge this is how it works.
