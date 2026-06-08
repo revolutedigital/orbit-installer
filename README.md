@@ -1,37 +1,119 @@
-# Readymade
+# Orbit Installer
 
-Install ready-made distribution images!
+> Instalador moderno em PT-BR pra **[Orbit Linux](https://github.com/revolutedigital/orbit-linux)**.
+> Fork do excelente [readymade](https://github.com/FyraLabs/readymade) da Fyra Labs com
+> identidade Orbit + tela de manifesto de privacidade + tom honesto.
 
-It is created as a replacement to Red Hat's [Anaconda](https://github.com/rhinstaller/anaconda) installer for Ultramarine Linux and tauOS after many complaints about the poor UX design of Anaconda, and the lack of working alternative installers for RPM-based distributions.
+## O que este fork tem de diferente do upstream
 
-Right now this is a work in progress, and Readymade will simply be a frontend for [systemd-repart](https://www.freedesktop.org/software/systemd/man/249/systemd-repart.html).
+Customizações específicas pro Orbit Linux, mantidas na branch `orbit-main`:
 
-Work on a dedicated backend for Readymade is planned.
+### 1. PT-BR no tom Orbit
+
+`po/pt-BR/readymade.ftl` reescrito do zero:
+- **2ª pessoa direta** — "você" em vez de "Por favor, defina"
+- **Linguagem do leigo** — "Apagar o Windows" em vez de "Disco Inteiro"
+- **Honestidade nos pontos críticos** — "Atenção: vou apagar a partição EFI. Outro
+  sistema vai deixar de bootar. Isso não tem volta."
+- **Marca "Gravidade/órbita" com moderação** — só na boas-vindas e na conclusão
+  ("Pronto. O Orbit já é seu. Reinicie pra entrar na sua nova órbita.")
+
+### 2. Tela Privacy (manifesto)
+
+`src/pages/privacy.rs` — nova página inserida entre "Como instalar" e "Confirmar"
+no fluxo de wholedisk:
+
+> **Seus dados ficam aqui.**
+>
+> O Orbit aprende como você trabalha. Tudo o que ele aprende fica neste computador —
+> nada vai pra nuvem, ninguém além de você vê.
+>
+> Você pode auditar e apagar tudo o que o Orbit aprendeu sobre você, a qualquer
+> momento. Ao instalar, você reconhece que é assim que ele funciona.
+>
+> **[Entendi]**
+
+Não é configuração de privacidade (privacidade no Orbit é **inegociável**, não opt-in).
+É **declaração de identidade**: o usuário pausa, lê o manifesto, e afirma que entendeu
+o que o Orbit é. Inspirado em Pop!_OS e Tails.
+
+### 3. Bento cards-manifesto durante install
+
+Os 3 cards que aparecem enquanto a instalação roda (estilo slideshow Mint/Pop) foram
+trocados de Welcome/Help/Contribute genéricos pra 3 mensagens-chave do Orbit:
+- **Ele aprende. Você continua privado.** (privacidade on-device)
+- **Ele não quebra sozinho.** (rollback atômico)
+- **Ele organiza por você.** (agente Orbit)
+
+Template em `crates/libreadymade/templates/orbit.toml`.
+
+## Como é distribuído
+
+Este fork **não publica RPM próprio**. É buildado in-tree pelo Containerfile do
+orbit-linux como multi-stage Rust:
+
+```dockerfile
+FROM quay.io/fedora/fedora:42 AS installer-builder
+# ... Terra repo (Fyra Labs) pra libhelium-devel ...
+RUN git clone --depth 1 --branch orbit-main --recurse-submodules --shallow-submodules \
+        https://github.com/revolutedigital/orbit-installer.git
+RUN cargo build --release --locked
+```
+
+O binário e assets vão pra imagem final do Orbit Linux via `COPY --from=installer-builder`.
+
+> ⚠ **Atenção ao submodule**: `crates/taidan_proc_macros` aponta pra
+> `FyraLabs/rdms_proc_macros`. Sempre clonar com `--recurse-submodules`, senão o build
+> falha.
+
+## Manutenção: rebase do upstream
+
+Quando o readymade upstream lançar versão nova (Fyra Labs publica releases mensais):
+
+```bash
+git remote add upstream https://github.com/FyraLabs/readymade.git
+git fetch upstream
+git checkout orbit-main
+git rebase upstream/main
+# Resolver conflitos em po/pt-BR/readymade.ftl, src/main.rs, src/pages/mod.rs
+# Re-aplicar src/pages/privacy.rs se desfizer
+git push --force-with-lease origin orbit-main
+```
+
+Depois, retag uma release do orbit-linux pra rebuildar a imagem.
+
+## Pegadinhas conhecidas
+
+- A macro `page!` gera automaticamente uma chamada `t!("page-<nome>")` pro título —
+  ao adicionar página nova, criar a chave nas DUAS locales (`po/pt-BR/` e `po/en-US/`).
+  O `i18n-embed-fl` valida em compile time contra en-US.
+- O match em `src/main.rs:139` (renderiza o widget atual) precisa cobrir todas as
+  variantes de `Page::*`. Adicionar uma sem essa entrada quebra com `non-exhaustive
+  patterns`.
+- `cargo build --locked` falha se o `Cargo.lock` divergir do upstream — depois de
+  rebase, rodar `cargo update -p <crate-divergente>` ou `cargo generate-lockfile` se
+  necessário.
 
 ## Hacking
 
-Please refer to [HACKING.md](HACKING.md) for more information on how to contribute to Readymade.
+Pra contribuir com o readymade em si (não com a customização Orbit), siga o
+[HACKING.md](HACKING.md) e contribua **upstream em FyraLabs/readymade** — este fork
+não aceita PRs que não sejam customizações específicas do Orbit.
 
-## Naming
+Pra contribuir com o Orbit Linux (e suas customizações neste fork), abra issue em
+https://github.com/revolutedigital/orbit-linux.
 
-As the convention of making up codenames for system components after J-Pop references, we have decided to name the installer after Ado's single, [Readymade](https://youtu.be/jg09lNupc1s), which happens to have a cool meaning to it as this installer essentially installs ready-made squashfs images.
+## Licença
 
-## License
+Mantém a do upstream: **GPL-3.0-or-later** (Copyright © 2024~2025 Fyra Labs &
+Ultramarine Linux Contributors).
 
-`GPL-3.0-or-later`
+Customizações Orbit (PT-BR, tela Privacy, bento cards) também GPL-3.0-or-later,
+Copyright © 2026 Revolute Digital / Orbit Linux Contributors.
 
-    Copyright © 2024~2025  Fyra Labs & Ultramarine Linux Contributors
+## Créditos
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+Este fork seria impossível sem o trabalho excepcional da [Fyra Labs](https://fyralabs.com/)
+e da comunidade do [Ultramarine Linux](https://ultramarine-linux.org/). O readymade
+upstream é o instalador mais maduro pra distros bootc em 2026 — fazer um fork foi a
+escolha mais barata e mais respeitosa que conseguimos.
