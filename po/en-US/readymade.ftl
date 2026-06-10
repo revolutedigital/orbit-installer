@@ -129,6 +129,13 @@ page-privacy-desc-1 = {$distro} learns from how you use your computer. Everythin
 page-privacy-desc-2 = You can audit and delete everything {$distro} learned about you, at any moment. By installing {$distro}, you acknowledge this is how it works.
 page-privacy-accept = I understand
 
+# v0.2.8 — honest opt-in toggles for 2 network-touching behaviors.
+# Both default ON (recommended), but clear about what they do.
+page-privacy-auto-update-title = Update the system automatically
+page-privacy-auto-update-desc = Every day Orbit downloads security fixes from the image server. Your IP is visible to the server. Recommended to keep on. You can turn it off later.
+page-privacy-flathub-title = App store (Flathub)
+page-privacy-flathub-desc = Enables the Discover store so you can install apps (OBS, Discord, Steam…). When you open the store, your IP is visible to Flathub. Recommended to keep on to use the store.
+
 # Bento cards (slideshow during installation — Orbit Linux addition)
 bento-learn-title = It learns. You stay private.
 bento-learn-desc = {$distro} adapts to how you work — and everything it learns about you stays on this machine. No cloud, no telemetry.

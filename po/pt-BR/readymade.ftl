@@ -163,6 +163,13 @@ page-privacy-desc-1 = O { $distro } aprende como você trabalha. Tudo o que ele 
 page-privacy-desc-2 = Você pode auditar e apagar tudo o que o { $distro } aprendeu sobre você, a qualquer momento. Ao instalar, você reconhece que é assim que ele funciona.
 page-privacy-accept = Entendi
 
+# v0.2.8 — toggles de opt-in honesto pra 2 comportamentos que tocam a rede.
+# Ambos default ON (recomendado), mas claros sobre o que fazem.
+page-privacy-auto-update-title = Atualizar o sistema automaticamente
+page-privacy-auto-update-desc = Todo dia o Orbit baixa correções de segurança do servidor de imagens. Seu IP fica visível pro servidor. Recomendado deixar ligado. Você pode desligar depois.
+page-privacy-flathub-title = Loja de aplicativos (Flathub)
+page-privacy-flathub-desc = Habilita a loja Discover pra você instalar apps (OBS, Discord, Steam…). Quando você abre a loja, seu IP fica visível pro Flathub. Recomendado deixar ligado pra usar a loja.
+
 # Cards da tela de instalação (slideshow Orbit, em vez de "Welcome/Help/Contribute")
 # 3 mensagens-manifesto sobre o que torna o Orbit diferente.
 bento-learn-title = Ele aprende. Você continua privado.
