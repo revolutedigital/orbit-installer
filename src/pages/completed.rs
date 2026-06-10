@@ -17,7 +17,7 @@ page!(Completed {
         Close => sender
             .output(CompletedPageOutput::Navigate(NavigationAction::Quit))
             .unwrap(),
-        PendriveRemovedToggled(checked) => {
+        PendriveRemovedToggled(checked: bool) => {
             self.pendrive_removed = checked;
         }
     } => {}
