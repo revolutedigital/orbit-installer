@@ -29,6 +29,8 @@ page-welcome = Bem-vindo ao { $distro }
 page-welcome-desc = Você pode experimentar o { $distro } primeiro ou começar a instalação agora. Sem pressa.
 page-welcome-try = Experimentar primeiro
 page-welcome-install = Instalar agora
+# v0.2.7: aviso alpha — versão atual só apaga disco inteiro.
+page-welcome-alpha-warning = Esta versão alpha do { $distro } só instala APAGANDO o disco inteiro. Não tem opção pra manter o Windows ou outro sistema. Faça backup antes. Dual-boot chega na v0.3.
 
 # Falha
 page-failure = Algo deu errado
@@ -42,7 +44,14 @@ page-language-next = Continuar
 
 # Conclusão — usa a marca "órbita" (2ª referência, fechamento)
 page-completed = Pronto
-page-completed-desc = O { $distro } já é seu. Reinicie pra entrar na sua nova órbita.
+page-completed-desc =
+    O { $distro } foi instalado.
+
+    Antes de reiniciar, RETIRE o pendrive do USB. Se você reiniciar com ele plugado, vai abrir o instalador de novo em vez do seu { $distro } instalado.
+
+    Quando reiniciar, você vai criar seu usuário e começar a usar.
+# v0.2.7: gate "retirei o pendrive" — Reiniciar só fica clicável quando marcado.
+page-completed-pendrive-check = Já retirei o pendrive do USB
 page-completed-close = Fechar
 page-completed-reboot = Reiniciar agora
 
@@ -59,6 +68,16 @@ page-installdual-otheros = Outro sistema
 
 # Confirmação
 page-confirmation = Confirmar
+# v0.2.7: bloco vermelho + gate "digitar APAGAR" — última defesa contra perda de dados.
+page-confirmation-erase-title = Vou apagar TUDO de { $disk }
+page-confirmation-erase-desc =
+    Toda foto, documento, programa, conta de Windows que tem aí dentro. Não dá pra desfazer depois que clicar.
+
+    <b>Pra confirmar, digite a palavra APAGAR (em maiúsculas) abaixo.</b>
+page-confirmation-erase-placeholder = digite: APAGAR
+# Palavra-chave EXATA que o usuário precisa digitar. Manter em português pra
+# obrigar leitura local. Em outras locales, traduzir.
+page-confirmation-erase-keyword = APAGAR
 page-confirmation-problem-device-mounted = { $dev } está em uso (montado em { $mountpoint }). Feche os programas que estão usando ele antes de continuar.
 page-confirmation-problem-devblkopen =
     O disco <tt>{ $dev }</tt> está sendo usado por estes processos:
