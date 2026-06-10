@@ -56,7 +56,7 @@ page!(Confirmation {
         Check => {
             self.problem = Problem::detect();
         },
-        EraseTextChanged(text) => {
+        EraseTextChanged(text: String) => {
             self.erase_text = text;
         }
     } => { StartInstallation }
