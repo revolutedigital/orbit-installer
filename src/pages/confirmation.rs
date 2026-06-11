@@ -153,7 +153,8 @@ page!(Confirmation {
 
             gtk::Label {
                 #[watch]
-                set_label: &t!("page-confirmation-erase-title"),
+                set_label: &t!("page-confirmation-erase-title",
+                    disk = APPLICATION_STATE.read().destination_disk.clone().map(|d| d.disk_name).unwrap_or_default()),
                 inline_css: "font-weight: bold; font-size: 1rem",
                 set_xalign: 0.0,
             },
@@ -161,8 +162,7 @@ page!(Confirmation {
 
         gtk::Label {
             #[watch]
-            set_label: &t!("page-confirmation-erase-desc",
-                disk = APPLICATION_STATE.read().destination_disk.clone().map(|d| d.disk_name).unwrap_or_default()),
+            set_label: &t!("page-confirmation-erase-desc"),
             set_use_markup: true,
             set_wrap: true,
             set_xalign: 0.0,
