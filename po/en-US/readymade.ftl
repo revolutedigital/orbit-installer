@@ -15,6 +15,8 @@ page-welcome = Welcome to {$distro}
 page-welcome-desc = You may try {$distro} or start the installation now.
 page-welcome-try = Try
 page-welcome-install = Install
+# v0.2.7: alpha warning — current version wipes entire disk.
+page-welcome-alpha-warning = This alpha version of {$distro} only installs by ERASING the entire disk. There is no option to keep Windows or another system. Back up your files first. Dual-boot lands in v0.3.
 
 page-failure = Installation Failure
 page-failure-close = Close
@@ -25,7 +27,14 @@ page-language-search-lang = Search Language/Locale…
 page-language-next = Next
 
 page-completed = Complete
-page-completed-desc = Installation complete. You may reboot now and enjoy your fresh system.
+page-completed-desc =
+    {$distro} has been installed.
+
+    Before rebooting, REMOVE the USB pendrive. If you reboot with it still plugged in, the installer will open again instead of your installed {$distro}.
+
+    On reboot, you'll create your user and start using the system.
+# v0.2.7: gate "removed pendrive" — Reboot only enabled when checked.
+page-completed-pendrive-check = I have removed the pendrive from USB
 page-completed-close = Close
 page-completed-reboot = Reboot
 
@@ -39,6 +48,16 @@ page-installdual = Dual Boot
 page-installdual-otheros = Other OS
 
 page-confirmation = Confirmation
+# v0.2.7: red box + "type ERASE" gate — final defense against data loss.
+page-confirmation-erase-title = I will erase EVERYTHING on {$disk}
+page-confirmation-erase-desc =
+    Every photo, document, program, Windows account inside it. There is no undo after clicking.
+
+    <b>To confirm, type the word ERASE (uppercase) below.</b>
+page-confirmation-erase-placeholder = type: ERASE
+# EXACT keyword the user must type. Localize per language and never machine-translate
+# blindly — wrong word here is a footgun.
+page-confirmation-erase-keyword = ERASE
 page-confirmation-problem-device-mounted = {$dev} is mounted on {$mountpoint}. Unmount it to proceed.
 page-confirmation-problem-devblkopen = The block-device <tt>{$dev}</tt> is in use by the following processes:
     <tt>{$pids}</tt>
