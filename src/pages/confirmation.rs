@@ -7,6 +7,9 @@ page!(Confirmation {
     root: libhelium::ViewMono,
     warns: Vec<Warning>,
     warn_dialog: Option<Controller<Warning>>,
+    // v0.2.7: gate "digitar APAGAR" — defesa final contra perda de dados.
+    // erase_text é o que o usuário escreveu; tem que bater EXATO com t!("page-confirmation-erase-keyword").
+    erase_text: String,
 }:
     init(root, sender, model, widgets) {
         gtk::glib::timeout_add(Duration::from_secs(1), move || {
@@ -52,6 +55,9 @@ page!(Confirmation {
         },
         Check => {
             self.problem = Problem::detect();
+        },
+        EraseTextChanged(text: String) => {
+            self.erase_text = text;
         }
     } => { StartInstallation }
 
@@ -127,6 +133,54 @@ page!(Confirmation {
         add_css_class: "error",
     },
 
+    // v0.2.7 — bloco vermelho com aviso destrutivo + gate "digitar APAGAR".
+    // Última defesa pro leigo que chegou aqui sem entender o que vai acontecer.
+    gtk::Box {
+        set_orientation: gtk::Orientation::Vertical,
+        set_spacing: 12,
+        set_margin_top: 16,
+        set_halign: gtk::Align::Center,
+        inline_css: "background: rgba(255, 108, 140, 0.10); border: 1px solid rgba(255, 108, 140, 0.40); border-radius: 12px; padding: 20px 24px; max-width: 540px;",
+
+        gtk::Box {
+            set_orientation: gtk::Orientation::Horizontal,
+            set_spacing: 12,
+
+            gtk::Image {
+                set_icon_name: Some("dialog-warning-symbolic"),
+                inline_css: "-gtk-icon-size: 28px; color: #FF6C8C",
+            },
+
+            gtk::Label {
+                #[watch]
+                set_label: &t!("page-confirmation-erase-title",
+                    disk = APPLICATION_STATE.read().destination_disk.clone().map(|d| d.disk_name).unwrap_or_default()),
+                inline_css: "font-weight: bold; font-size: 1rem",
+                set_xalign: 0.0,
+            },
+        },
+
+        gtk::Label {
+            #[watch]
+            set_label: &t!("page-confirmation-erase-desc"),
+            set_use_markup: true,
+            set_wrap: true,
+            set_xalign: 0.0,
+            set_max_width_chars: 56,
+            inline_css: "font-size: 0.9rem; opacity: 0.9",
+        },
+
+        gtk::Entry {
+            #[watch]
+            set_placeholder_text: Some(&t!("page-confirmation-erase-placeholder")),
+            set_max_width_chars: 24,
+            set_halign: gtk::Align::Center,
+            connect_changed[sender] => move |entry| {
+                sender.input(ConfirmationPageMsg::EraseTextChanged(entry.text().to_string()));
+            },
+        },
+    },
+
     gtk::Box {
         set_orientation: gtk::Orientation::Horizontal,
         set_spacing: 4,
@@ -146,8 +200,10 @@ page!(Confirmation {
         },
 
         libhelium::Button {
+            // v0.2.7: só habilita o botão quando NÃO há problema E o usuário
+            // digitou "APAGAR" exato (case-sensitive — exige atenção).
             #[watch]
-            set_sensitive: model.problem.is_none(),
+            set_sensitive: model.problem.is_none() && model.erase_text == t!("page-confirmation-erase-keyword"),
             set_is_pill: true,
             #[watch]
             set_label: &t!("page-welcome-install"),

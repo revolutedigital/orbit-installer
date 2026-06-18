@@ -33,6 +33,31 @@ page!(Welcome:
             set_max_width_chars: 60,
             set_wrap: true
         },
+
+        // v0.2.7 — banner amarelo de aviso: v0.2.x só suporta apagar disco inteiro.
+        // Sem este aviso, leigo que leu docs (antes corrigidas) ainda pode achar
+        // que tem dual-boot. Aqui é claro: NÃO TEM.
+        gtk::Box {
+            set_orientation: gtk::Orientation::Horizontal,
+            set_spacing: 12,
+            set_margin_top: 24,
+            set_halign: gtk::Align::Center,
+            inline_css: "background: rgba(255, 184, 108, 0.12); border: 1px solid rgba(255, 184, 108, 0.35); border-radius: 12px; padding: 16px 20px;",
+
+            gtk::Image {
+                set_icon_name: Some("dialog-warning-symbolic"),
+                inline_css: "-gtk-icon-size: 24px; color: #FFB86C",
+            },
+
+            gtk::Label {
+                #[watch]
+                set_label: &t!("page-welcome-alpha-warning"),
+                set_max_width_chars: 56,
+                set_wrap: true,
+                set_xalign: 0.0,
+                inline_css: "font-size: 0.9rem; opacity: 0.95",
+            },
+        },
     },
 
     gtk::Box {

@@ -29,6 +29,8 @@ page-welcome = Bem-vindo ao { $distro }
 page-welcome-desc = Você pode experimentar o { $distro } primeiro ou começar a instalação agora. Sem pressa.
 page-welcome-try = Experimentar primeiro
 page-welcome-install = Instalar agora
+# v0.2.7: aviso alpha — versão atual só apaga disco inteiro.
+page-welcome-alpha-warning = Esta versão alpha do { $distro } só instala APAGANDO o disco inteiro. Não tem opção pra manter o Windows ou outro sistema. Faça backup antes. Dual-boot chega na v0.3.
 
 # Falha
 page-failure = Algo deu errado
@@ -42,7 +44,14 @@ page-language-next = Continuar
 
 # Conclusão — usa a marca "órbita" (2ª referência, fechamento)
 page-completed = Pronto
-page-completed-desc = O { $distro } já é seu. Reinicie pra entrar na sua nova órbita.
+page-completed-desc =
+    O { $distro } foi instalado.
+
+    Antes de reiniciar, RETIRE o pendrive do USB. Se você reiniciar com ele plugado, vai abrir o instalador de novo em vez do seu { $distro } instalado.
+
+    Quando reiniciar, você vai criar seu usuário e começar a usar.
+# v0.2.7: gate "retirei o pendrive" — Reiniciar só fica clicável quando marcado.
+page-completed-pendrive-check = Já retirei o pendrive do USB
 page-completed-close = Fechar
 page-completed-reboot = Reiniciar agora
 
@@ -59,6 +68,16 @@ page-installdual-otheros = Outro sistema
 
 # Confirmação
 page-confirmation = Confirmar
+# v0.2.7: bloco vermelho + gate "digitar APAGAR" — última defesa contra perda de dados.
+page-confirmation-erase-title = Vou apagar TUDO de { $disk }
+page-confirmation-erase-desc =
+    Toda foto, documento, programa, conta de Windows que tem aí dentro. Não dá pra desfazer depois que clicar.
+
+    <b>Pra confirmar, digite a palavra APAGAR (em maiúsculas) abaixo.</b>
+page-confirmation-erase-placeholder = digite: APAGAR
+# Palavra-chave EXATA que o usuário precisa digitar. Manter em português pra
+# obrigar leitura local. Em outras locales, traduzir.
+page-confirmation-erase-keyword = APAGAR
 page-confirmation-problem-device-mounted = { $dev } está em uso (montado em { $mountpoint }). Feche os programas que estão usando ele antes de continuar.
 page-confirmation-problem-devblkopen =
     O disco <tt>{ $dev }</tt> está sendo usado por estes processos:
@@ -143,6 +162,13 @@ page-privacy-title = Seus dados ficam aqui
 page-privacy-desc-1 = O { $distro } aprende como você trabalha. Tudo o que ele aprende fica neste computador — nada vai pra nuvem, ninguém além de você vê.
 page-privacy-desc-2 = Você pode auditar e apagar tudo o que o { $distro } aprendeu sobre você, a qualquer momento. Ao instalar, você reconhece que é assim que ele funciona.
 page-privacy-accept = Entendi
+
+# v0.2.8 — toggles de opt-in honesto pra 2 comportamentos que tocam a rede.
+# Ambos default ON (recomendado), mas claros sobre o que fazem.
+page-privacy-auto-update-title = Atualizar o sistema automaticamente
+page-privacy-auto-update-desc = Todo dia o Orbit baixa correções de segurança do servidor de imagens. Seu IP fica visível pro servidor. Recomendado deixar ligado. Você pode desligar depois.
+page-privacy-flathub-title = Loja de aplicativos (Flathub)
+page-privacy-flathub-desc = Habilita a loja Discover pra você instalar apps (OBS, Discord, Steam…). Quando você abre a loja, seu IP fica visível pro Flathub. Recomendado deixar ligado pra usar a loja.
 
 # Cards da tela de instalação (slideshow Orbit, em vez de "Welcome/Help/Contribute")
 # 3 mensagens-manifesto sobre o que torna o Orbit diferente.
